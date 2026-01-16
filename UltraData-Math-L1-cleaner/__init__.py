@@ -1,4 +1,4 @@
-# UltraData-Math-L1-cleaner
+# UltraData-Math-L1-Cleaner
 # L1 数据清洗层：格式修复 + 内容过滤
 
 """

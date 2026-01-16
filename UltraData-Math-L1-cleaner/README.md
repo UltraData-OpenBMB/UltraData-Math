@@ -1,11 +1,11 @@
-# UltraData-Math-L1-cleaner
+# UltraData-Math-L1-Cleaner
 
 L1 数据清洗层：格式修复 + 内容过滤算子集合。
 
 ## 📂 目录结构
 
 ```
-UltraData-Math-L1-cleaner/
+UltraData-Math-L1-Cleaner/
 ├── __init__.py
 ├── README.md
 ├── base_op.py                           # 基础算子类定义

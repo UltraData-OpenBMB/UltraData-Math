@@ -33,16 +33,16 @@
 
 | 层级 | 名称 | 功能 | 工具 |
 |:---:|:---:|:---|:---|
-| **L0** | 原始数据 | HTML 数学解析 | `UltraData-Math-L0-parser` |
-| **L1** | 过滤数据 | 格式修复 + 内容过滤 | `UltraData-Math-L1-cleaner` |
-| **L2** | 精筛数据 | 质量分类模型筛选 | `UltraData-Math-L2-classifier` |
-| **L3** | 合成数据 | 多格式数据合成 | `UltraData-Math-L3-generator` |
+| **L0** | 原始数据 | HTML 数学解析 | `UltraData-Math-L0-Parser` |
+| **L1** | 过滤数据 | 格式修复 + 内容过滤 | `UltraData-Math-L1-Cleaner` |
+| **L2** | 精筛数据 | 质量分类模型筛选 | `UltraData-Math-L2-Selector` |
+| **L3** | 合成数据 | 多格式数据合成 | `UltraData-Math-L3-Generator` |
 
 ---
 
 ### L0 - 原始数据（Raw Data）
 
-**定义：** 从 Common Crawl 等网页源经解析器提取的初始数据。针对通用 HTML 提取器在捕获数学公式方面的局限性，我们基于 [magic-html](https://github.com/opendatalab/magic-html) 开发了 `UltraData-Math-L0-parser`。
+**定义：** 从 Common Crawl 等网页源经解析器提取的初始数据。针对通用 HTML 提取器在捕获数学公式方面的局限性，我们基于 [magic-html](https://github.com/opendatalab/magic-html) 开发了 `UltraData-Math-L0-Parser`。
 
 #### 🔧 UltraData-Math-L0-Parser
 
@@ -50,7 +50,7 @@
 
 **📊 与原版 magic-html 对比**
 
-| 特性 | magic-html | UltraData-Math-L0-parser |
+| 特性 | magic-html | UltraData-Math-L0-Parser |
 |:---|:---:|:---:|
 | 统一提取模式 (UnifiedParser) | ❌ | ✅ 自动识别并合并分散帖子|
 | 多级回退策略 | ❌ | ✅ `primary` → `wild_text` → `readability` |
@@ -101,7 +101,7 @@ result = parser.extract(html, base_url=url, html_type="unified")
 - **Mapper（格式修复）**：清理不可见字符、连续换行、导航栏/按钮等噪声文本
 - **Filter（内容过滤）**：过滤短文、异常长度文本
 
-**特征：** 数据噪声显著减少，格式一致性提高；详见 [`UltraData-Math-L1-cleaner/README.md`](./UltraData-Math-L1-cleaner/README.md)。
+**特征：** 数据噪声显著减少，格式一致性提高；详见 [`UltraData-Math-L1-Cleaner/README.md`](./UltraData-Math-L1-Cleaner/README.md)。
 
 ---
 
@@ -144,7 +144,7 @@ result = parser.extract(html, base_url=url, html_type="unified")
 
 | 解析器 | 平均分 | MMLU | GSM8K | HumanEval | math | mbpp_full | mmlu-stem |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **UltraData-Math-L0-parser (Ours)** | **43.44** | 51.41 | 54.97 | **31.71** | **28.72** | 47.10 | 46.76 |
+| **UltraData-Math-L0-Parser (Ours)** | **43.44** | 51.41 | 54.97 | **31.71** | **28.72** | 47.10 | 46.76 |
 | trafilatura + w3m | 42.33 | 50.95 | 54.51 | 27.44 | 27.64 | 47.93 | 45.52 |
 | trafilatura | 42.44 | 51.42 | 56.03 | 26.83 | 28.08 | 45.64 | 46.62 |
 | Megamath | 42.32 | 51.46 | 54.06 | 29.88 | 26.04 | 45.64 | 46.81 |

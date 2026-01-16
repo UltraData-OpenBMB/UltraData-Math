@@ -1,11 +1,11 @@
-# UltraData-Math-L3-generator
+# UltraData-Math-L3-Generator
 
 L3 合成数据层：基于 LLM 的多格式数学数据合成工具。
 
 ## 📂 目录结构
 
 ```
-UltraData-Math-L3-generator/
+UltraData-Math-L3-Generator/
 ├── run_synthesis.py                 # OpenAI API 调用脚本
 ├── qa_synthesis.py                  # Q&A 问答对合成 Prompt
 ├── conversation_synthesis.py        # 多轮对话合成 Prompt
