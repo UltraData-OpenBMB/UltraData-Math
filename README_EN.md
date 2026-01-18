@@ -6,7 +6,7 @@
 
 <div align="center">
 
-[🤗 Dataset](https://huggingface.co/datasets/openbmb/UltraData-Math-L1) | [🌐 Project Page](https://github.com/UltraData-OpenBMB/UltraData-Math) | [🇨🇳 中文 README](README.md)
+[🤗 Dataset](https://huggingface.co/datasets/openbmb/UltraData-Math-L1) | [💻 Code Repository](https://github.com/UltraData-OpenBMB/UltraData-Math)
 
 </div>
 
