@@ -29,6 +29,9 @@
 
 ***UltraData-Math*** 已应用于 [MiniCPM 系列](https://huggingface.co/collections/openbmb/minicpm-4-6841ab29d180257e940baa9b) 模型的数学预训练。本仓库开源了数据处理流水线的核心工具与配置。
 
+- **[UltraData-Math-L1](https://huggingface.co/datasets/openbmb/UltraData-Math-L1)**: 大规模高质量数学预训练数据集，包含 159.4B tokens 的网页数学语料。
+- **[UltraData-Math-L3](https://huggingface.co/datasets/openbmb/UltraData-Math-L3)**: 高质量合成数学数据集，包含 37.1B tokens 的多格式合成数据（Q&A、多轮对话、知识教材等）。
+
 
 ## 🏗️ 数据处理流水线
 

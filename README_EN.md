@@ -29,6 +29,9 @@ Experiments show that on the MiniCPM-1B architecture, ***UltraData-Math*** achie
 
 ***UltraData-Math*** has been applied to the mathematical pre-training of the [MiniCPM Series](https://huggingface.co/collections/openbmb/minicpm-4-6841ab29d180257e940baa9b) models. This repository open-sources the core tools and configurations of the data processing pipeline.
 
+- **[UltraData-Math-L1](https://huggingface.co/datasets/openbmb/UltraData-Math-L1)**: Large-scale high-quality mathematical pre-training dataset, containing 159.4B tokens of web mathematical corpus.
+- **[UltraData-Math-L3](https://huggingface.co/datasets/openbmb/UltraData-Math-L3)**: High-quality synthetic mathematical dataset, containing 37.1B tokens of multi-format synthetic data (Q&A, multi-turn dialogues, knowledge textbooks, etc.).
+
 
 ## 🏗️ Data Processing Pipeline
 
