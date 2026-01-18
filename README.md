@@ -6,7 +6,7 @@
 
 <div align="center">
 
-[📜 技术报告](https://arxiv.org/abs/xxxx.xxxxx) | [📄 MiniCPM 论文](https://huggingface.co/papers/2506.07900) | [🤗 数据集](https://huggingface.co/datasets/openbmb/UltraData-Math) | [🌐 项目主页](https://huggingface.co/collections/openbmb/minicpm-4-6841ab29d180257e940baa9b)
+[🤗 数据集](https://huggingface.co/datasets/openbmb/UltraData-Math-L1) | [🌐 项目主页](https://github.com/UltraData-OpenBMB/UltraData-Math)
 
 </div>
 
@@ -18,14 +18,21 @@
 - **数据质量层面**：现有数据集普遍缺乏系统的质量分级机制，高价值数学内容与低质噪声混杂。
 - **数据多样性层面**：主流数据集多源自教科书或竞赛题库，缺少真实网页中的数学讨论与应用场景；合成数据格式单一，难以覆盖多轮对话、多风格表达等多样化需求。
 
-针对上述问题，我们提出 ***UltraData-Math***——一个面向数学推理任务的大规模高质量预训练数据集。本数据集基于 [Ultra-Data](xxx)的L0-L4 分级数据处理框架开发，包含四个递进层级：(1) L0 原始数据层，基于 *magic-html* 开发数学解析器，结合 *w3m* 布局保持渲染与多级回退策略，将 MathML、KaTeX、AsciiMath 标准化为 LaTeX 格式；(2) L1 过滤数据层，通过启发式规则清洗噪声并进行文档级去重；(3) L2 精筛数据层，使用闭源大模型标注种子数据并蒸馏至轻量 Embedding 分类器，实现全量语料的高效质量分级；(4) L3 合成数据层，基于多模型集成生成 Q&A、多轮对话、多风格改写、知识接地教材等多种格式的合成数据。实验表明，在 MiniCPM-1B 架构上，***UltraData-Math*** 在 MATH 基准上达到 **37.02** 分，相较 Nemotron-CC 4plus 提升 **+3.62** 分；在 GSM8K 上达到 **61.79** 分，提升 **+3.34** 分，同时保持代码生成与通用知识能力。
+针对上述问题，我们提出 ***UltraData-Math***——一个面向数学推理任务的大规模高质量预训练数据集。本数据集基于 [Ultra-Data](xxx) 的 L0-L4 分级数据处理框架开发，包含四个递进层级：
+
+- **L0 原始数据层**：基于 *magic-html* 开发数学解析器，结合 *w3m* 布局保持渲染与多级回退策略，将 MathML、KaTeX、AsciiMath 标准化为 LaTeX 格式
+- **L1 过滤数据层**：通过启发式规则清洗噪声并进行文档级去重
+- **L2 精筛数据层**：使用闭源大模型标注种子数据并蒸馏至轻量 Embedding 分类器，实现全量语料的高效质量分级
+- **L3 合成数据层**：基于多模型集成生成 Q&A、多轮对话、多风格改写、知识接地教材等多种格式的合成数据
+
+实验表明，在 MiniCPM-1B 架构上，***UltraData-Math*** 在 MATH 基准上达到 **37.02** 分，相较 Nemotron-CC 4plus 提升 **+3.62** 分；在 GSM8K 上达到 **61.79** 分，提升 **+3.34** 分，同时保持代码生成与通用知识能力。
 
 ***UltraData-Math*** 已应用于 [MiniCPM 系列](https://huggingface.co/collections/openbmb/minicpm-4-6841ab29d180257e940baa9b) 模型的数学预训练。本仓库开源了数据处理流水线的核心工具与配置。
 
 
 ## 🏗️ 数据处理流水线
 
-为突破现有数学数据集在质量与多样性上的局限，我们建立了一套以"数学内容完整性"和"信息密度"为核心的精细化分级标准。***UltraData-Math*** 采用了xxxxx（这里给UltraData占位）提出的 **L0-L4 数据分级体系**，通过标准化的层级定义，实现数学数据资产的有序管理与高效流转。每一级都代表了更高的数据纯度与数学价值，同时也对应着更精细的加工程度。
+为突破现有数学数据集在质量与多样性上的局限，我们建立了一套以"数学内容完整性"和"信息密度"为核心的精细化分级标准。***UltraData-Math*** 采用了 UltraData观点论文提出的 **L0-L4 数据分级体系**，通过标准化的层级定义，实现数学数据资产的有序管理与高效流转。每一级都代表了更高的数据纯度与数学价值，同时也对应着更精细的加工程度。
 
 <div align="center">
   <img src="assets/ultradata-math-pipeline.png" width="900"/>
