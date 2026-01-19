@@ -6,7 +6,7 @@
 
 <div align="center">
 
-[🤗 Dataset](https://huggingface.co/datasets/openbmb/UltraData-Math-L1) | [💻 Code Repository](https://github.com/UltraData-OpenBMB/UltraData-Math)
+[🤗 Dataset](https://huggingface.co/datasets/openbmb/UltraData-Math-L1) | [💻 Code Repository](https://github.com/UltraData-OpenBMB/UltraData-Math) | [🇨🇳 中文 README](README.md)
 
 </div>
 
@@ -31,7 +31,6 @@ Experiments show that on the MiniCPM-1B architecture, ***UltraData-Math*** achie
 
 - **[UltraData-Math-L1](https://huggingface.co/datasets/openbmb/UltraData-Math-L1)**: Large-scale high-quality mathematical pre-training dataset, containing 159.4B tokens of web mathematical corpus.
 - **[UltraData-Math-L3](https://huggingface.co/datasets/openbmb/UltraData-Math-L3)**: High-quality synthetic mathematical dataset, containing 37.1B tokens of multi-format synthetic data (Q&A, multi-turn dialogues, knowledge textbooks, etc.).
-
 
 ## 🏗️ Data Processing Pipeline
 
