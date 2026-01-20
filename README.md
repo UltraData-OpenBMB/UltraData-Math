@@ -154,9 +154,9 @@ Based on data from the same source, we used different parsers for extraction and
 | Parser | Average | MMLU | GSM8K | HumanEval | math | mbpp_full | mmlu-stem |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **UltraData-Math-L0-Parser (Ours)** | **43.44** | 51.41 | 54.97 | **31.71** | **28.72** | 47.10 | 46.76 |
-| trafilatura + w3m | 42.33 | 50.95 | 54.51 | 27.44 | 27.64 | 47.93 | 45.52 |
-| trafilatura | 42.44 | 51.42 | 56.03 | 26.83 | 28.08 | 45.64 | 46.62 |
-| Megamath | 42.32 | 51.46 | 54.06 | 29.88 | 26.04 | 45.64 | 46.81 |
+| trafilatura + w3m | 42.33 | 50.95 | 54.51 | 27.44 | 27.64 | **47.93** | 45.52 |
+| trafilatura | 42.44 | 51.42 | **56.03** | 26.83 | 28.08 | 45.64 | 46.62 |
+| Megamath | 42.32 | **51.46** | 54.06 | 29.88 | 26.04 | 45.64 | **46.81** |
 | magic-html + w3m | 41.29 | 51.23 | 51.63 | 26.83 | 26.58 | 45.02 | 46.45 |
 
 ### Full Evaluation Results
@@ -166,9 +166,9 @@ We used a single dataset for independent training to directly compare the effect
 | Model | Average | MMLU | GSM8K | HumanEval | math | mbpp_full | mmlu-stem | R-bench | Math-bench |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **UltraData-Math (Ours)** | **43.79** | 51.67 | **61.79** | 32.93 | **37.02** | **49.27** | 45.93 | 23.38 | **48.33** |
-| Nemotron-cc 4plus mind | 43.45 | 52.09 | 59.97 | 34.76 | 35.96 | 48.03 | 45.99 | 23.51 | 47.25 |
-| Nemotron-cc 4plus | 42.62 | 51.96 | 58.45 | 35.37 | 33.40 | 46.47 | 45.67 | 22.74 | 46.92 |
-| MegaMath-Web-Pro | 41.38 | 53.16 | 56.71 | 31.71 | 32.12 | 47.10 | 47.15 | 21.23 | 41.83 |
+| Nemotron-cc 4plus mind | 43.45 | **52.09** | 59.97 | 34.76 | 35.96 | 48.03 | **45.99** | **23.51** | 47.25 |
+| Nemotron-cc 4plus | 42.62 | 51.96 | 58.45 | **35.37** | 33.40 | 46.47 | 45.67 | 22.74 | 46.92 |
+| MegaMath-Web-Pro | 41.38 | **53.16** | 56.71 | 31.71 | 32.12 | 47.10 | **47.15** | 21.23 | 41.83 |
 | FineMath-4+ | 40.51 | 50.90 | 56.25 | 29.88 | 29.84 | 48.96 | 44.98 | 18.93 | 44.33 |
 
 
