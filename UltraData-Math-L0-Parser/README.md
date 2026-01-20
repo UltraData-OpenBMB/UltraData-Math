@@ -23,8 +23,8 @@ UltraData-Math 项目 L0 层（原始数据层）的 HTML 解析器。
 
 ```shell
 # 从源码安装
-git clone https://github.com/opendatalab/magic-html.git（改为对应github仓库名）
-cd magic-html
+git clone https://github.com/UltraData-OpenBMB/UltraData-Math.git
+cd UltraData-Math/UltraData-Math-L0-Parser
 pip install .
 ```
 
