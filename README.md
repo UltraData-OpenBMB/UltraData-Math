@@ -166,7 +166,7 @@ We used a single dataset for independent training to directly compare the effect
 | Model | Average | MMLU | GSM8K | HumanEval | math | mbpp_full | mmlu-stem | R-bench | Math-bench |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **UltraData-Math (Ours)** | **43.79** | 51.67 | **61.79** | 32.93 | **37.02** | **49.27** | 45.93 | 23.38 | **48.33** |
-| Nemotron-cc 4plus mind | 43.45 | **52.09** | 59.97 | 34.76 | 35.96 | 48.03 | **45.99** | **23.51** | 47.25 |
+| Nemotron-cc 4plus mind | 43.45 | 52.09 | 59.97 | 34.76 | 35.96 | 48.03 | 45.99 | **23.51** | 47.25 |
 | Nemotron-cc 4plus | 42.62 | 51.96 | 58.45 | **35.37** | 33.40 | 46.47 | 45.67 | 22.74 | 46.92 |
 | MegaMath-Web-Pro | 41.38 | **53.16** | 56.71 | 31.71 | 32.12 | 47.10 | **47.15** | 21.23 | 41.83 |
 | FineMath-4+ | 40.51 | 50.90 | 56.25 | 29.88 | 29.84 | 48.96 | 44.98 | 18.93 | 44.33 |
