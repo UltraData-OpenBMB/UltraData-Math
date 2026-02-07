@@ -1,38 +1,44 @@
 # UltraData-Math-L3-Generator
 
-L3 合成数据层：基于 LLM 的多格式数学数据合成工具。
+<div align="center">
 
-## 📂 目录结构
+[🇨🇳 中文 README](README_ZH.md)
+
+</div>
+
+L3 Synthetic Data Layer: a multi-format mathematical data synthesis tool powered by LLMs.
+
+## 📂 Directory Structure
 
 ```
 UltraData-Math-L3-Generator/
-├── run_synthesis.py                 # OpenAI API 调用脚本
-├── qa_synthesis.py                  # Q&A 问答对合成 Prompt
-├── conversation_synthesis.py        # 多轮对话合成 Prompt
-├── multistyle_rewrite.py           # 多风格改写 Prompt
-├── knowledge_textbook.py           # 知识点提取 + 教材练习 Prompt
+├── run_synthesis.py                 # OpenAI API invocation script
+├── qa_synthesis.py                  # Q&A pair synthesis prompt
+├── conversation_synthesis.py        # Multi-turn conversation synthesis prompt
+├── multistyle_rewrite.py           # Multi-style rewriting prompt
+├── knowledge_textbook.py           # Knowledge extraction + textbook exercise prompt
 └── README.md
 ```
 
-## 🔧 安装依赖
+## 🔧 Install Dependencies
 
 ```bash
 pip install openai
 ```
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 环境配置
+### Environment Setup
 
 ```bash
-# 设置 API Key
+# Set API Key
 export OPENAI_API_KEY="your-api-key"
 
-# 可选：设置自定义 API 地址（兼容 OpenAI 格式的 API）
+# Optional: Set a custom API endpoint (OpenAI-compatible APIs)
 export OPENAI_BASE_URL="https://your-api-endpoint/v1"
 ```
 
-### 基本用法
+### Basic Usage
 
 ```bash
 python run_synthesis.py \
@@ -44,143 +50,143 @@ python run_synthesis.py \
     --workers 10
 ```
 
-## 📋 任务类型
+## 📋 Task Types
 
-### 1. Q&A 问答对合成 (`qa`)
+### 1. Q&A Pair Synthesis (`qa`)
 
-根据数学内容生成问答对，按教育难度分级。
+Generate question-answer pairs from mathematical content, categorized by educational difficulty level.
 
-**参数 `--level`：**
-| 值 | 说明 |
+**Parameter `--level`:**
+| Value | Description |
 |:---|:---|
-| `grade_school` | 小学 |
-| `middle_school` | 初中 |
-| `high_school` | 高中（默认） |
-| `college` | 大学 |
+| `grade_school` | Grade school |
+| `middle_school` | Middle school |
+| `high_school` | High school (default) |
+| `college` | College |
 
 ```bash
 python run_synthesis.py -i data.jsonl -o output.jsonl -t qa --level high_school
 ```
 
-### 2. 多轮对话合成 (`conversation`)
+### 2. Multi-turn Conversation Synthesis (`conversation`)
 
-将数学内容转换为多轮对话格式。
+Convert mathematical content into multi-turn dialogue format.
 
-**参数 `--style`：**
-| 值 | 说明 |
+**Parameter `--style`:**
+| Value | Description |
 |:---|:---|
-| `two_professors` | 两位教授对话 |
-| `teacher_student` | 师生对话（默认） |
-| `two_students` | 两位学生对话 |
-| `interview` | 面试风格 |
-| `problem_solving` | 问题解决 |
-| `layman_expert` | 外行与专家 |
-| `debate` | 辩论风格 |
+| `two_professors` | Conversation between two professors |
+| `teacher_student` | Teacher-student dialogue (default) |
+| `two_students` | Conversation between two students |
+| `interview` | Interview style |
+| `problem_solving` | Problem-solving style |
+| `layman_expert` | Layman and expert |
+| `debate` | Debate style |
 
 ```bash
 python run_synthesis.py -i data.jsonl -o output.jsonl -t conversation --style teacher_student
 ```
 
-### 3. 多风格改写 (`rewrite`)
+### 3. Multi-style Rewriting (`rewrite`)
 
-将数学内容改写为不同风格。
+Rewrite mathematical content in various styles.
 
-**参数 `--style`：**
-| 值 | 说明 |
+**Parameter `--style`:**
+| Value | Description |
 |:---|:---|
-| `wikipedia` | 维基百科风格 |
-| `textbook` | 教科书风格（默认） |
-| `blog` | 博客风格 |
-| `popular_science` | 科普风格 |
-| `academic_paper` | 学术论文风格 |
-| `learning_note` | 学习笔记风格 |
-| `lecture_note` | 讲义风格 |
+| `wikipedia` | Wikipedia style |
+| `textbook` | Textbook style (default) |
+| `blog` | Blog style |
+| `popular_science` | Popular science style |
+| `academic_paper` | Academic paper style |
+| `learning_note` | Learning notes style |
+| `lecture_note` | Lecture notes style |
 
 ```bash
 python run_synthesis.py -i data.jsonl -o output.jsonl -t rewrite --style textbook
 ```
 
-### 4. 知识点提取 (`knowledge`)
+### 4. Knowledge Point Extraction (`knowledge`)
 
-从数学内容中提取定义、定理、性质等知识点。
+Extract definitions, theorems, properties, and other knowledge points from mathematical content.
 
 ```bash
 python run_synthesis.py -i data.jsonl -o knowledge_output.jsonl -t knowledge
 ```
 
-### 5. 教材练习生成 (`textbook`)
+### 5. Textbook Exercise Generation (`textbook`)
 
-基于知识点生成不同难度的教材式练习。
+Generate textbook-style exercises at varying difficulty levels based on knowledge points.
 
-**参数 `--difficulty`：**
-| 值 | 说明 |
+**Parameter `--difficulty`:**
+| Value | Description |
 |:---|:---|
-| `easy` | 简单（默认） |
-| `medium` | 中等 |
-| `hard` | 困难 |
+| `easy` | Easy (default) |
+| `medium` | Medium |
+| `hard` | Hard |
 
 ```bash
 python run_synthesis.py -i knowledge.jsonl -o output.jsonl -t textbook --difficulty medium
 ```
 
-**注意：** 输入文件需包含 `knowledge_point` 字段（可通过 `--knowledge-field` 自定义）。
+**Note:** The input file must contain a `knowledge_point` field (customizable via `--knowledge-field`).
 
-## ⚙️ 参数说明
+## ⚙️ Parameters
 
-| 参数 | 说明 | 默认值 |
+| Parameter | Description | Default |
 |:---|:---|:---|
-| `-i, --input` | 输入 JSONL 文件路径 | 必填 |
-| `-o, --output` | 输出 JSONL 文件路径 | 必填 |
-| `-t, --task` | 任务类型：`qa`, `conversation`, `rewrite`, `knowledge`, `textbook` | 必填 |
-| `--level` | Q&A 难度级别 | `high_school` |
-| `--style` | 对话/改写风格 | - |
-| `--difficulty` | 教材练习难度 | `easy` |
-| `--text-field` | 输入文本字段名 | `text` |
-| `--knowledge-field` | 知识点字段名 | `knowledge_point` |
-| `--api-key` | OpenAI API Key | 环境变量 |
-| `--base-url` | API Base URL | 环境变量 |
-| `--model` | 模型名称 | `gpt-4o` |
-| `--temperature` | 采样温度 | `0.7` |
-| `--max-tokens` | 最大生成 token 数 | `4096` |
-| `-w, --workers` | 并发数 | `10` |
-| `--max-retries` | 最大重试次数 | `3` |
-| `--limit` | 限制处理样本数量 | - |
-| `-q, --quiet` | 静默模式 | `False` |
+| `-i, --input` | Input JSONL file path | Required |
+| `-o, --output` | Output JSONL file path | Required |
+| `-t, --task` | Task type: `qa`, `conversation`, `rewrite`, `knowledge`, `textbook` | Required |
+| `--level` | Q&A difficulty level | `high_school` |
+| `--style` | Conversation/rewrite style | - |
+| `--difficulty` | Textbook exercise difficulty | `easy` |
+| `--text-field` | Input text field name | `text` |
+| `--knowledge-field` | Knowledge point field name | `knowledge_point` |
+| `--api-key` | OpenAI API Key | Environment variable |
+| `--base-url` | API Base URL | Environment variable |
+| `--model` | Model name | `gpt-4o` |
+| `--temperature` | Sampling temperature | `0.7` |
+| `--max-tokens` | Maximum generated tokens | `4096` |
+| `-w, --workers` | Number of concurrent workers | `10` |
+| `--max-retries` | Maximum retry attempts | `3` |
+| `--limit` | Limit number of samples to process | - |
+| `-q, --quiet` | Quiet mode | `False` |
 
-## 📊 输入输出格式
+## 📊 Input/Output Format
 
-**输入：** JSONL 格式，每行一个 JSON 对象（参见 `example_data.jsonl`）：
+**Input:** JSONL format, one JSON object per line (see `example_data.jsonl`):
 
 ```jsonl
 {"text": "The quadratic formula states that for any quadratic equation..."}
 {"text": "The Pythagorean theorem is a fundamental relation..."}
 ```
 
-**输出：** 在原数据基础上添加 `synthesis_result` 字段：
+**Output:** Adds a `synthesis_result` field to the original data:
 
 ```json
 {
-  "text": "原始数学内容",
+  "text": "Original mathematical content",
   "synthesis_result": {
-    "raw": "完整响应",
-    "problem": "生成的问题",
-    "solution": "详细解答"
+    "raw": "Full response",
+    "problem": "Generated problem",
+    "solution": "Detailed solution"
   }
 }
 ```
 
-## 🔌 兼容其他 API
+## 🔌 Compatible with Other APIs
 
-支持任何 OpenAI 兼容的 API（如 Qwen、DeepSeek、vLLM 等）：
+Supports any OpenAI-compatible API (e.g., Qwen, DeepSeek, vLLM, etc.):
 
 ```bash
-# 使用阿里云 Qwen API
+# Using Alibaba Cloud Qwen API
 export OPENAI_API_KEY="your-dashscope-api-key"
 export OPENAI_BASE_URL="https://dashscope.aliyuncs.com/compatible-mode/v1"
 
 python run_synthesis.py -i data.jsonl -o output.jsonl -t qa --model qwen-plus
 ```
 
-## 📜 许可证
+## 📜 License
 
-本项目基于 [Apache 2.0](../LICENSE) 许可证发布。
+This project is licensed under [Apache 2.0](../LICENSE).

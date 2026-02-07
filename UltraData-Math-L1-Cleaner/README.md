@@ -1,84 +1,90 @@
 # UltraData-Math-L1-Cleaner
 
-L1 数据清洗层：格式修复 + 内容过滤算子集合。
+<div align="center">
 
-## 📂 目录结构
+[🇨🇳 中文 README](README_ZH.md)
+
+</div>
+
+L1 Data Cleaning Layer: a collection of format repair and content filtering operators.
+
+## 📂 Directory Structure
 
 ```
 UltraData-Math-L1-Cleaner/
 ├── __init__.py
 ├── README.md
-├── base_op.py                           # 基础算子类定义
-├── mapper/                              # 格式修复类算子
+├── base_op.py                           # Base operator class definition
+├── mapper/                              # Format repair operators
 │   ├── __init__.py
-│   ├── nobreakspace.py                  # 修复不可见字符
-│   ├── clean_invisible_chars.py         # 清理乱码字符
-│   ├── removebreakline.py               # 清洗连续换行
-│   ├── remove_navigation_bar.py         # 删除导航栏
-│   ├── remove_page_button.py            # 删除翻页按钮
-│   └── remove_page_small_button.py      # 删除小按钮
-└── filter/                              # 内容过滤类算子
+│   ├── nobreakspace.py                  # Fix invisible characters
+│   ├── clean_invisible_chars.py         # Clean garbled characters
+│   ├── removebreakline.py               # Remove consecutive line breaks
+│   ├── remove_navigation_bar.py         # Remove navigation bars
+│   ├── remove_page_button.py            # Remove pagination buttons
+│   └── remove_page_small_button.py      # Remove small buttons
+└── filter/                              # Content filtering operators
     ├── __init__.py
-    ├── short_article_without_punctuation_filter.py  # 短文无标点过滤
-    └── content_length_filter.py         # 文本长度过滤
+    ├── short_article_without_punctuation_filter.py  # Short text without punctuation filter
+    └── content_length_filter.py         # Content length filter
 ```
 
-## 🔧 算子说明
+## 🔧 Operators
 
-### Mapper 算子（格式修复）
+### Mapper Operators (Format Repair)
 
-对数据进行清洗，修复错误的数据，不改变数据条数。
+Clean and repair malformed data without changing the number of records.
 
-| 算子名称 | 功能描述 |
+| Operator | Description |
 |:---|:---|
-| `nobreakspace` | 清理零宽字符、不可见空格、控制字符 |
-| `clean_invisible_chars` | 清理 Unicode 私有区乱码字符 |
-| `remove_break_line` | 清洗 3 个及以上的连续换行符 |
-| `remove_en_navigation_bar_mapper` | 删除导航栏文本 |
-| `remove_en_page_button_mapper` | 删除翻页按钮文本 |
-| `remove_en_page_small_button_mapper` | 删除各类小按钮文本 |
+| `nobreakspace` | Remove zero-width characters, invisible spaces, and control characters |
+| `clean_invisible_chars` | Remove garbled characters from Unicode private use areas |
+| `remove_break_line` | Collapse 3 or more consecutive line breaks |
+| `remove_en_navigation_bar_mapper` | Remove navigation bar text |
+| `remove_en_page_button_mapper` | Remove pagination button text |
+| `remove_en_page_small_button_mapper` | Remove miscellaneous small button text |
 
-### Filter 算子（内容过滤）
+### Filter Operators (Content Filtering)
 
-当数据不符合要求时整条丢弃，符合要求则不对数据做任何改动。
+Discard entire records that do not meet the criteria; qualifying records are left unchanged.
 
-| 算子名称 | 功能描述 |
+| Operator | Description |
 |:---|:---|
-| `en_short_article_without_punctuation_filter` | 过滤无标点且 <200 字符的短文 |
-| `content_length_filter` | 文本长度过滤（默认 80~100万字符） |
+| `en_short_article_without_punctuation_filter` | Filter out short texts (<200 chars) without punctuation |
+| `content_length_filter` | Content length filter (default range: 80 to 1,000,000 characters) |
 
-## 📋 使用示例
+## 📋 Usage Examples
 
 ```python
 from mapper import NBSP, CleanInvisibleChars, RemoveBreakLine
 from filter import ContentLengthFilter, ShortArticleWithoutPunctuationFilter
 
-# 创建算子实例
-col_name_map = {"content": "text"}  # 字段映射
+# Create operator instances
+col_name_map = {"content": "text"}  # Field mapping
 
-# Mapper 示例
+# Mapper example
 nbsp_cleaner = NBSP(col_name_map)
-sample = {"text": "Hello\u00A0World"}  # 包含 NBSP 字符
+sample = {"text": "Hello\u00A0World"}  # Contains NBSP character
 cleaned_sample = nbsp_cleaner.process_single(sample)
 
-# Filter 示例
+# Filter example
 length_filter = ContentLengthFilter(
     col_name_map, 
     content_lang="en",
     min_content_len=100,
     max_content_len=50000
 )
-result = length_filter.process_single(sample)  # 返回 None 表示被过滤
+result = length_filter.process_single(sample)  # Returns None if filtered out
 
-# 批量处理
+# Batch processing
 samples = [{"text": "sample1"}, {"text": "sample2"}]
 processed = length_filter.process_batched(samples)
 ```
 
-### 完整清洗流程示例
+### Full Cleaning Pipeline Example
 
 ```python
-# 定义清洗流程
+# Define the cleaning pipeline
 pipeline_config = [
     {'name': 'nobreakspace'},
     {'name': 'clean_invisible_chars'},
@@ -91,6 +97,6 @@ pipeline_config = [
 ]
 ```
 
-## 📜 许可证
+## 📜 License
 
-本项目基于 [Apache 2.0](../LICENSE) 许可证发布。
+This project is licensed under [Apache 2.0](../LICENSE).
