@@ -4,25 +4,23 @@
   <img src="assets/ultradata-math-logo.png" width="600"/>
 </div>
 
-<div align="center">
-
-[🤗 Dataset](https://huggingface.co/datasets/openbmb/UltraData-Math) | [💻 Code Repository](https://github.com/UltraData-OpenBMB/UltraData-Math) | [🇨🇳 中文 README](README_ZH.md)
-
-</div>
+<p align="center">
+<a href="https://huggingface.co/datasets/openbmb/UltraData-Math">🤗 Dataset</a> | <a href="https://github.com/UltraData-OpenBMB/UltraData-Math">💻 Source Code</a> | <a href="README_ZH.md">🇨🇳 中文 README</a>
+</p>
 
 ## 📚 Introduction
 
-High-quality pre-training data is crucial for enhancing the mathematical reasoning capabilities of Large Language Models (LLMs). However, existing mathematical pre-training data construction schemes have the following shortcomings:
+High-quality pre-training data is crucial for enhancing the mathematical reasoning capabilities of large language models (LLMs). However, existing mathematical pre-training data construction schemes have the following shortcomings:
 
-- **HTML Parsing Level**: General extractors (such as trafilatura, readability) are mainly designed for news/article scenarios, lacking specialized processing for mathematical formulas and other content, often leading to formula structure destruction or loss; meanwhile, mathematical discussions on forum-like pages are difficult to extract completely.
-- **Data Quality Level**: Existing datasets generally lack a systematic quality grading mechanism, with high-value mathematical content mixed with low-quality noise.
-- **Data Diversity Level**: Mainstream datasets mostly originate from textbooks or competition question banks, lacking mathematical discussions and application scenarios in real web pages; synthetic data formats are single, difficult to cover diverse needs such as multi-turn dialogues and multi-style expressions.
+- **HTML Parsing**: General extractors (such as trafilatura, readability) are mainly designed for news/article parsing, lacking specialized processing for mathematical formulas and other content, often leading to formula structure destruction or loss; meanwhile, mathematical discussions on forum-like pages are difficult to extract completely.
+- **Data Quality**: Existing datasets generally lack a systematic quality grading mechanism, with high-value mathematical content mixed with low-quality noise.
+- **Data Diversity**: Mainstream datasets mostly originate from textbooks or competition question banks, lacking mathematical discussions and application scenarios in real web pages; synthetic data formats are single, difficult to cover diverse needs such as multi-turn dialogues and multi-style expressions.
 
-To address these issues, we propose ***UltraData-Math***—a large-scale high-quality pre-training dataset for mathematical reasoning tasks. This dataset is developed based on the [UltraData](xxx) L0-L4 Tiered Data Management Framework, containing four progressive levels:
+To address these issues, we propose ***UltraData-Math***—a large-scale high-quality pre-training dataset for mathematical reasoning tasks. This dataset is developed based on the [UltraData](https://huggingface.co/collections/openbmb/ultradata) L0-L4 Tiered Data Management Framework, containing four progressive levels:
 
-- **L0 Raw Data Layer**: Developed a mathematical parser based on *magic-html*, combined with *w3m* layout preservation rendering and multi-level fallback strategies, standardizing MathML, KaTeX, and AsciiMath into LaTeX format.
+- **L0 Raw Data Layer**: Develops a mathematical parser based on *magic-html*, combined with *w3m* layout preservation rendering and multi-level fallback strategies, standardizing MathML, KaTeX, and AsciiMath into LaTeX format.
 - **L1 Filtered Data Layer**: Cleans noise through heuristic rules and performs document-level deduplication.
-- **L2 Selected Data Layer**: Uses closed-source large models to annotate seed data and distills it into a lightweight Embedding classifier to achieve efficient quality grading of the full corpus.
+- **L2 Selected Data Layer**: Uses proprietary large models to annotate seed data and distills it into a lightweight embedding classifier to achieve efficient quality grading of the full corpus.
 - **L3 Refined Data Layer**: Produces structured content with clear reasoning through rewriting, synthetic generation, and refinement in various formats such as Q&A, multi-turn dialogues, multi-style rewriting, and knowledge-grounded textbooks.
 
 Experiments show that on the MiniCPM-1.2B architecture, ***UltraData-Math*** achieves a score of **37.02** on the MATH500 benchmark, an improvement of **+3.62** compared to Nemotron-CC 4plus; it achieves **61.79** on GSM8K, an improvement of **+3.34**, while maintaining code generation and general knowledge capabilities.
@@ -35,7 +33,7 @@ Experiments show that on the MiniCPM-1.2B architecture, ***UltraData-Math*** ach
 
 ## 🏗️ Data Processing Pipeline
 
-To break through the limitations of existing mathematical datasets in quality and diversity, we established a refined grading standard centered on "mathematical content integrity" and "information density". ***UltraData-Math*** adopts the **L0-L4 Tiered Data Management Framework** proposed by the [UltraData](xxx) paper. Through standardized level definitions, it achieves orderly management and efficient flow of mathematical data assets. Each level represents higher data purity and mathematical value, while also corresponding to a more refined degree of processing.
+To break through the limitations of existing mathematical datasets in quality and diversity, we established a refined grading standard centered on "mathematical content integrity" and "information density". ***UltraData-Math*** adopts the **L0-L4 Tiered Data Management Framework** proposed by the [UltraData](https://huggingface.co/collections/openbmb/ultradata) paper. Through standardized level definitions, it achieves orderly management and efficient flow of mathematical data assets. Each level represents higher data purity and mathematical value, while also corresponding to a more refined degree of processing.
 
 <div align="center">
   <img src="assets/ultradata-math-pipeline.png" width="900"/>
@@ -120,8 +118,8 @@ Supports converting various mathematical formats into unified LaTeX, and intelli
 **Definition:** Data screened by quality assessment models, possessing high information density and mathematical educational value, with clear themes and coherent reasoning logic.
 
 **Processing Methods:**
-- Annotate seed data using closed-source large models.
-- Distill into a lightweight Embedding classifier to achieve efficient scoring of the full corpus.
+- Annotate seed data using proprietary large models.
+- Distill into a lightweight embedding classifier to achieve efficient scoring of the full corpus.
 - Multi-dimensional quality tags (mathematical depth, reasoning completeness, educational value).
 
 **Characteristics:** Retains samples with high contribution to improving the model's mathematical reasoning ability, further reducing noise and significantly increasing mathematical content density. It is the core resource for the pre-training phase.
@@ -151,7 +149,7 @@ We evaluated data quality using the **Decay Verification** method: continuing pr
 
 ### Effectiveness of L0 Parsing Strategy
 
-To fairly compare different parsing strategies, we conducted experiments on a data subset sampled from the **2023-2024** distribution. We re-parsed the raw HTML from this source using different parsers and **applied the same L1 cleaning operators to all baselines**. This comparison demonstrates the **overall benefit of our L0 Parser + L1 Filtering pipeline** against other parsers under identical cleaning conditions.
+To fairly compare different parsing strategies, we conducted experiments on a data subset sampled from the **2023-2024** distribution. We re-parsed the raw HTML from this source using different parsers. This comparison demonstrates the **effectiveness of our L0 Parser** against other parsers.
 
 | Parser | Average | MMLU | MMLU-STEM | MATH500 | GSM8K | MBPP | HumanEval |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -163,7 +161,7 @@ To fairly compare different parsing strategies, we conducted experiments on a da
 
 ### Pipeline Effectiveness (L1 vs L2 vs L3)
 
-To validate the effectiveness of our L0-L3 hierarchical framework, we conducted ablation studies comparing models trained on different tiers of UltraData-Math. Unlike the L0 parser comparison above (which used a 2023-2024 subset), these results are based on the **full dataset**.
+To validate the effectiveness of our L0-L3 tiered framework, we conducted ablation studies comparing models trained on different tiers of UltraData-Math. Unlike the L0 parser comparison above (which used a 2023-2024 subset), these results are based on the **full dataset**.
 
 | Dataset | Average | MMLU | MMLU-STEM | MATH500 | GSM8K | MBPP | HumanEval |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |

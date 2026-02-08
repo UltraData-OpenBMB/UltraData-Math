@@ -4,11 +4,9 @@
   <img src="assets/ultradata-math-logo.png" width="600"/>
 </div>
 
-<div align="center">
-
-[🤗 数据集](https://huggingface.co/datasets/openbmb/UltraData-Math) | [💻 代码仓库](https://github.com/UltraData-OpenBMB/UltraData-Math) | [🇺🇸 English README](README.md)
-
-</div>
+<p align="center">
+<a href="https://huggingface.co/datasets/openbmb/UltraData-Math">🤗 数据集</a> | <a href="https://github.com/UltraData-OpenBMB/UltraData-Math">💻 源代码</a> | <a href="README.md">🇺🇸 English README</a>
+</p>
 
 ## 📚 简介
 
@@ -18,11 +16,11 @@
 - **数据质量层面**：现有数据集普遍缺乏系统的质量分级机制，高价值数学内容与低质噪声混杂。
 - **数据多样性层面**：主流数据集多源自教科书或竞赛题库，缺少真实网页中的数学讨论与应用场景；合成数据格式单一，难以覆盖多轮对话、多风格表达等多样化需求。
 
-针对上述问题，我们提出 ***UltraData-Math***——一个面向数学推理任务的大规模高质量预训练数据集。本数据集基于 [UltraData](xxx) 的 L0-L4 分级数据管理框架开发，包含四个递进层级：
+针对上述问题，我们提出 ***UltraData-Math***——一个面向数学推理任务的大规模高质量预训练数据集。本数据集基于 [UltraData](https://huggingface.co/collections/openbmb/ultradata) 的 L0-L4 分级数据管理框架开发，包含四个递进层级：
 
 - **L0 原始数据层**：基于 *magic-html* 开发数学解析器，结合 *w3m* 布局保持渲染与多级回退策略，将 MathML、KaTeX、AsciiMath 标准化为 LaTeX 格式。
 - **L1 过滤数据层**：通过启发式规则清洗噪声并进行文档级去重。
-- **L2 精选数据层**：使用闭源大模型标注种子数据并蒸馏至轻量 Embedding 分类器，实现全量语料的高效质量分级。
+- **L2 精选数据层**：使用闭源大模型标注种子数据并蒸馏至轻量 embedding 分类器，实现全量语料的高效质量分级。
 - **L3 精炼数据层**：通过改写、合成生成与精炼，生成具有清晰推理链条的结构化内容，涵盖 Q&A、多轮对话、多风格改写、知识教材等多种格式。
 
 实验表明，在 MiniCPM-1.2B 架构上，***UltraData-Math*** 在 MATH500 基准上达到 **37.02** 分，相较 Nemotron-CC 4plus 提升 **+3.62** 分；在 GSM8K 上达到 **61.79** 分，提升 **+3.34** 分，同时保持代码生成与通用知识能力。
@@ -36,7 +34,7 @@
 
 ## 🏗️ 数据处理流水线
 
-为突破现有数学数据集在质量与多样性上的局限，我们建立了一套以"数学内容完整性"和"信息密度"为核心的精细化分级标准。***UltraData-Math*** 采用了 [UltraData](xxx) 论文提出的 **L0-L4 分级数据管理框架**，通过标准化的层级定义，实现数学数据资产的有序管理与高效流转。每一级都代表了更高的数据纯度与数学价值，同时也对应着更精细的加工程度。
+为突破现有数学数据集在质量与多样性上的局限，我们建立了一套以"数学内容完整性"和"信息密度"为核心的精细化分级标准。***UltraData-Math*** 采用了 [UltraData](https://huggingface.co/collections/openbmb/ultradata) 论文提出的 **L0-L4 分级数据管理框架**，通过标准化的层级定义，实现数学数据资产的有序管理与高效流转。每一级都代表了更高的数据纯度与数学价值，同时也对应着更精细的加工程度。
 
 <div align="center">
   <img src="assets/ultradata-math-pipeline.png" width="900"/>
@@ -122,7 +120,7 @@ result = parser.extract(html, base_url=url, html_type="unified")
 
 **处理手段：**
 - 闭源大模型标注种子数据
-- 轻量 Embedding 分类器蒸馏，实现全量语料高效打分
+- 轻量 embedding 分类器蒸馏，实现全量语料高效打分
 - 多维度质量标签（数学深度、推理完整性、教育价值）
 
 **特征：** 保留对模型数学推理能力提升贡献度高的样本，噪声进一步降低，数学内容密度显著提高，是预训练阶段的核心资源。
@@ -152,7 +150,7 @@ result = parser.extract(html, base_url=url, html_type="unified")
 
 ### L0 解析策略有效性
 
-为公平对比不同解析策略，我们在 **2023-2024** 年分布的数据子集上进行实验。我们使用不同解析器重新解析原始 HTML，并对**所有基线应用相同的 L1 清洗算子**。该对比展示了我们 **L0 解析器 + L1 过滤管线的综合收益**。
+为公平对比不同解析策略，我们在 **2023-2024** 年分布的数据子集上进行实验。我们使用不同解析器重新解析原始 HTML。该对比展示了我们 **L0 解析器的有效性**。
 
 | 解析器 | 平均分 | MMLU | MMLU-STEM | MATH500 | GSM8K | MBPP | HumanEval |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
