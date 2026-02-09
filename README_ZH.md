@@ -165,7 +165,7 @@ result = parser.extract(html, base_url=url, html_type="unified")
 
 ### 流水线有效性（L1 vs L2 vs L3）
 
-为验证 L0-L3 分级框架的有效性，我们对使用不同层级 UltraData-Math 训练的模型进行了消融实验。与上文 L0 解析器对比（使用 2023-2024 子集）不同，以下结果基于**全量数据集**。
+为验证 L0-L3 分级框架的有效性，我们对使用不同层级 UltraData-Math 训练的模型进行了消融实验。与上文 L0 解析器对比（使用 2023-2024 子集）不同，以下结果基于**全量数据集**。结果表明，更高层级的数据（L3）显著提升了数学推理能力（MATH500、GSM8K）及通用能力。
 
 <div align="center">
   <img src="assets/ultradata-math-l1l2l3-comparison.png" width="700"/>

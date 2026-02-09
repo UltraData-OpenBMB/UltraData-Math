@@ -164,7 +164,7 @@ To fairly compare different parsing strategies, we conducted experiments on a da
 
 ### Pipeline Effectiveness (L1 vs L2 vs L3)
 
-To validate the effectiveness of our L0-L3 tiered framework, we conducted ablation studies comparing models trained on different tiers of UltraData-Math. Unlike the L0 parser comparison above (which used a 2023-2024 subset), these results are based on the **full dataset**.
+To validate the effectiveness of our L0-L3 tiered framework, we conducted ablation studies comparing models trained on different tiers of UltraData-Math. Unlike the L0 parser comparison above (which used a 2023-2024 subset), these results are based on the **full dataset**. Results demonstrate that higher-tier data (L3) significantly boosts mathematical reasoning (MATH500, GSM8K) and general capabilities.
 
 <div align="center">
   <img src="assets/ultradata-math-l1l2l3-comparison.png" width="700"/>
