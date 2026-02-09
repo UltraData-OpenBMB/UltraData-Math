@@ -12,7 +12,7 @@
 
 ## 🆕 What's New
 
-- **2026.02.09**: Released UltraData-Math (290B+ tokens), a large-scale high-quality mathematical pre-training dataset with three progressive tiers (L1/L2/L3).
+- **2026.02.09**: Released UltraData-Math (290B+ tokens), a large-scale high-quality mathematical pre-training dataset with three progressive tiers (L1/L2-preview/L3).
 
 ## 📚 Introduction
 
