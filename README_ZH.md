@@ -8,6 +8,12 @@
 <a href="https://huggingface.co/datasets/openbmb/UltraData-Math">🤗 数据集</a> | <a href="https://github.com/UltraData-OpenBMB/UltraData-Math">💻 源代码</a> | <a href="README.md">🇺🇸 English README</a>
 </p>
 
+***UltraData-Math*** 是一个面向数学推理的大规模高质量预训练数据集，总计 **290B+ tokens**，涵盖三个递进层级——**L1**（170.5B tokens 网页语料）、**L2**（33.7B tokens 质量精选）、**L3**（88B tokens 多格式精炼），旨在系统性提升大语言模型的数学推理能力。已应用于 [MiniCPM 系列](https://huggingface.co/collections/openbmb/minicpm-4-6841ab29d180257e940baa9b) 模型的数学预训练。
+
+## 🆕 最新动态
+
+- **2026.02.09**：发布 UltraData-Math（290B+ tokens），面向数学推理的大规模高质量预训练数据集，包含三个递进层级（L1/L2/L3）。
+
 ## 📚 简介
 
 高质量预训练数据对提升大语言模型的数学推理能力至关重要。然而，现有数学预训练数据构建方案存在以下不足：
@@ -16,14 +22,14 @@
 - **数据质量层面**：现有数据集普遍缺乏系统的质量分级机制，高价值数学内容与低质噪声混杂。
 - **数据多样性层面**：主流数据集多源自教科书或竞赛题库，缺少真实网页中的数学讨论与应用场景；合成数据格式单一，难以覆盖多轮对话、多风格表达等多样化需求。
 
-针对上述问题，我们提出 ***UltraData-Math***——一个面向数学推理任务的大规模高质量预训练数据集。本数据集基于 [UltraData](https://huggingface.co/collections/openbmb/ultradata) 的 L0-L4 分级数据管理框架开发，包含四个递进层级：
+针对上述问题，我们提出 ***UltraData-Math***——一个面向数学推理任务的大规模高质量预训练数据集。本数据集基于 [UltraData](https://ultradata.openbmb.cn/blog/position-paper) 的 L0-L4 分级数据管理框架开发，包含四个递进层级：
 
 - **L0 原始数据层**：基于 *magic-html* 开发数学解析器，结合 *w3m* 布局保持渲染与多级回退策略，将 MathML、KaTeX、AsciiMath 标准化为 LaTeX 格式。
 - **L1 过滤数据层**：通过启发式规则清洗噪声并进行文档级去重。
 - **L2 精选数据层**：使用闭源大模型标注种子数据并蒸馏至轻量 embedding 分类器，实现全量语料的高效质量分级。
 - **L3 精炼数据层**：通过改写、合成生成与精炼，生成具有清晰推理链条的结构化内容，涵盖 Q&A、多轮对话、多风格改写、知识教材等多种格式。
 
-实验表明，在 MiniCPM-1.2B 架构上，***UltraData-Math*** 在 MATH500 基准上达到 **37.02** 分，相较 Nemotron-CC 4plus 提升 **+3.62** 分；在 GSM8K 上达到 **61.79** 分，提升 **+3.34** 分，同时保持代码生成与通用知识能力。
+实验表明，在 MiniCPM-1.2B 架构上，***UltraData-Math*** 在 MATH500 基准上达到 **37.02pp**，相较 Nemotron-CC 4plus 提升 **+3.62pp**；在 GSM8K 上达到 **61.79pp**，提升 **+3.34pp**，同时保持代码生成与通用知识能力。
 
 ***UltraData-Math*** 已应用于 [MiniCPM 系列](https://huggingface.co/collections/openbmb/minicpm-4-6841ab29d180257e940baa9b) 模型的数学预训练。本仓库开源了数据处理流水线的核心工具与配置。
 
@@ -34,7 +40,7 @@
 
 ## 🏗️ 数据处理流水线
 
-为突破现有数学数据集在质量与多样性上的局限，我们建立了一套以"数学内容完整性"和"信息密度"为核心的精细化分级标准。***UltraData-Math*** 采用了 [UltraData](https://huggingface.co/collections/openbmb/ultradata) 论文提出的 **L0-L4 分级数据管理框架**，通过标准化的层级定义，实现数学数据资产的有序管理与高效流转。每一级都代表了更高的数据纯度与数学价值，同时也对应着更精细的加工程度。
+为突破现有数学数据集在质量与多样性上的局限，我们建立了一套以"数学内容完整性"和"信息密度"为核心的精细化分级标准。***UltraData-Math*** 采用了 [UltraData](https://ultradata.openbmb.cn/blog/position-paper) 论文提出的 **L0-L4 分级数据管理框架**，通过标准化的层级定义，实现数学数据资产的有序管理与高效流转。每一级都代表了更高的数据纯度与数学价值，同时也对应着更精细的加工程度。
 
 <div align="center">
   <img src="assets/ultradata-math-pipeline.png" width="900"/>
@@ -144,43 +150,34 @@ result = parser.extract(html, base_url=url, html_type="unified")
 
 我们使用 **衰减验证（Decay Verification）** 方法评估数据质量：在 **MiniCPM-1.2B** 基座模型（使用 **MiniCPM3-4B** 分词器，预训练 1.3T tokens）上继续训练 **~100B tokens**（30% 目标数据 + 70% 通用数据）。我们使用 [OpenCompass](https://github.com/open-compass/opencompass) 作为评估框架。评估基准包括：
 
-- **数学推理：** GSM8K、MATH500、Math-Bench、R-Bench-Math
-- **代码生成：** HumanEval、MBPP
-- **综合知识：** MMLU、MMLU-STEM
+- **通用英文：** MMLU、ARC-E、ARC-C、BigBench Hard (BBH)、CommonSenseQA、HellaSwag、OpenbookQA、PIQA、SIQA、Winogrande
+- **通用中文：** C-Eval、CMMLU
+- **数学推理：** MATH500、GSM8K、Math-Bench、R-Bench-Math
+- **代码推理：** MBPP、HumanEval
 
 ### L0 解析策略有效性
 
 为公平对比不同解析策略，我们在 **2023-2024** 年分布的数据子集上进行实验。我们使用不同解析器重新解析原始 HTML。该对比展示了我们 **L0 解析器的有效性**。
 
-| 解析器 | 平均分 | MMLU | MMLU-STEM | MATH500 | GSM8K | MBPP | HumanEval |
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **UltraData-Math-Parser (Ours)** | **43.44** | 51.41 | 46.76 | **28.72** | 54.97 | 47.10 | **31.71** |
-| trafilatura + w3m | 42.33 | 50.95 | 45.52 | 27.64 | 54.51 | **47.93** | 27.44 |
-| trafilatura | 42.44 | 51.42 | 46.62 | 28.08 | **56.03** | 45.64 | 26.83 |
-| Megamath | 42.32 | **51.46** | **46.81** | 26.04 | 54.06 | 45.64 | 29.88 |
-| magic-html + w3m | 41.29 | 51.23 | 46.45 | 26.58 | 51.63 | 45.02 | 26.83 |
+<div align="center">
+  <img src="assets/ultradata-math-l0-parser-comparison.png" width="700"/>
+</div>
 
 ### 流水线有效性（L1 vs L2 vs L3）
 
 为验证 L0-L3 分级框架的有效性，我们对使用不同层级 UltraData-Math 训练的模型进行了消融实验。与上文 L0 解析器对比（使用 2023-2024 子集）不同，以下结果基于**全量数据集**。
 
-| 数据集 | 平均分 | MMLU | MMLU-STEM | MATH500 | GSM8K | MBPP | HumanEval |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **UltraData-Math-L1** | 42.31 | 51.41 | 45.44 | 27.78 | 54.66 | 44.71 | 29.88 |
-| **UltraData-Math-L2** | 42.57 | 50.93 | 45.52 | 29.20 | 52.92 | 44.50 | 32.32 |
-| **UltraData-Math-L3** | **46.44** | **51.67** | **45.93** | **37.02** | **61.79** | **49.27** | **32.93** |
+<div align="center">
+  <img src="assets/ultradata-math-l1l2l3-comparison.png" width="700"/>
+</div>
 
 ### 完整评测结果
 
 为与现有公开数学预训练数据集进行对比，我们使用相同的模型架构和训练预算（~100B tokens）在每个数据集上独立训练模型。基线包括 [Nemotron-CC-Math](https://huggingface.co/datasets/nvidia/Nemotron-CC-Math-v1)、[MegaMath-Web-Pro](https://huggingface.co/datasets/LLM360/MegaMath) 和 [FineMath](https://huggingface.co/datasets/HuggingFaceTB/finemath)。所有模型在相同条件下评估以确保公平对比：
 
-| 模型 | 平均分 | MMLU | MMLU-STEM | MATH500 | GSM8K | MBPP | HumanEval | R-Bench-Math | Math-Bench |
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **UltraData-Math (Ours)** | **43.79** | 51.67 | 45.93 | **37.02** | **61.79** | **49.27** | 32.93 | 23.38 | **48.33** |
-| Nemotron-cc 4plus mind | 43.45 | 52.09 | 45.99 | 35.96 | 59.97 | 48.03 | 34.76 | **23.51** | 47.25 |
-| Nemotron-cc 4plus | 42.62 | 51.96 | 45.67 | 33.40 | 58.45 | 46.47 | **35.37** | 22.74 | 46.92 |
-| MegaMath-Web-Pro | 41.38 | **53.16** | **47.15** | 32.12 | 56.71 | 47.10 | 31.71 | 21.23 | 41.83 |
-| FineMath-4+ | 40.51 | 50.90 | 44.98 | 29.84 | 56.25 | 48.96 | 29.88 | 18.93 | 44.33 |
+<div align="center">
+  <img src="assets/ultradata-math-full-comparison.png" width="700"/>
+</div>
 
 ## ❤️ 致谢
 
