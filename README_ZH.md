@@ -192,7 +192,7 @@ result = parser.extract(html, base_url=url, html_type="unified")
 ```bibtex
 @misc{ultradata-math,
   title={UltraData-Math},
-  author={UltraData Team},
+  author={Chuyue Zhou and Hongya Lyu and Xinle Lin and Hengyu Zhao and Junshao Guo and Xueren Zhang and Shuaikang Xue and Qiang Ma and Jie Zhou and Yudong Wang and Zhiyuan Liu},
   year={2026},
   url={https://huggingface.co/datasets/openbmb/UltraData-Math},
   publisher={Hugging Face}
